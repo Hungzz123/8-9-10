@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Xin Việc</title>
+    <style>
+        /* CSS styles here */
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input,
+        select,
+        button {
+            width: calc(100% - 20px);
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 10px;
+            color: red;
+        }
+
+        #genderContainer {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        #genderContainer label {
+            margin-right: 10px;
+            
+        }
+
+        #genderexpertise {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<form id="cvForm">
+    <label for="fullname">Your name</label>
+    <input type="text" id="fullname" name="fullname" placeholder="Parvez Ansari" required>
+
+    <div id="genderContainer">
+        <label>Gender</label>
+        <label><input type="radio" name="gender" value="male"> Male</label>
+        <label><input type="radio" name="gender" value="female"> Female</label>
+    </div>
+
+    <label for="phone">Mobile</label>
+    <input type="tel" id="phone" name="phone" placeholder="Mobile" required>
+    
+     <label for="city">City</label>
+    <select id="city" name="city" required>
+        <option value="" disabled selected>Select</option>
+        <option value="HCM">Hồ Chí Minh</option>
+    </select>
+
+        <label for="expertise">expertise</label>
+        <div id="genderexpertise">
+            <input type="checkbox" id="expertise1" name="expertise" value="Programming">
+            <label for="expertise1">HTML</label>
+    
+            <input type="checkbox" id="expertise2" name="expertise" value="Design">
+            <label for="expertise2">CSS</label>
+
+            <input type="checkbox" id="expertise2" name="expertise" value="Design">
+            <label for="expertise2">javascript</label>
+
+            <input type="checkbox" id="expertise2" name="expertise" value="Design">
+            <label for="expertise2">jquery</label>
+    
+            <!-- Thêm các checkbox chuyên môn khác vào đây -->
+        </div>
+
+        <label for="email">Email</label>
+    <input type="text" id="email" name="email" placeholder="ParvezAnsari@gmail.com" required>
+
+        <label for="dob">Date of birth</label>
+        <input type="text" id="dob" name="dob" placeholder="mm/dd/yyyy" required>
+
+        <label for="address">Address</label>
+        <input type="text" id="address" name="address" required>
+    
+        <label for="country">Country</label>
+        <input type="text" id="country" name="country" required>
+    
+    <label for="region">Group</label>
+    <select id="region" name="region" required>
+        <option value="north">Family</option>
+        <option value="central">Friend</option>
+        <option value="south">Co-woker</option>
+        <option value="south">Neighbour</option>
+
+    </select>
+
+    <button type="button" onclick="saveCV()">Save</button>
+</form>
+
+<div id="cvContent"></div>
+
+<script>
+    function saveCV() {
+        var fullName = document.getElementById("fullName").value;
+        var gender = document.getElementById("gender").value;
+        var phone = document.getElementById("phone").value;
+        var city = document.getElementById("city").value;
+        var email = document.getElementById("email").value;
+        var dob = document.getElementById("dob").value;
+        var address = document.getElementById("address").value;
+        var country = document.getElementById("country").value;
+
+
+        // Kiểm tra dữ liệu trước khi hiển thị
+        if (!fullName || !gender || !phone || !city || !email|| !expertise || !dob || !address || !country | !group) {
+            alert("Vui lòng điền đầy đủ thông tin.");
+            return;
+        }
+        
+        // Kiểm tra số điện thoại có đúng 10 số hay không
+    if (phone.length !== 10 || isNaN(phone)) {
+        alert("Số điện thoại phải có đúng 10 số.");
+        return;
+    }
+        // Hiển thị CV
+        var cvContent = `
+        <h2>${fullName}</h2>
+            <p>Gender: ${gioiTinh}</p>
+            <p>Phone: ${phone}</p>
+            <p>City ${city}</p>
+            <p>Expertise ${expertiseList.join(", ")}</p>
+            <p>Email: ${email}</p>
+            <p>Date of Birth ${birthday}</p>
+            <p>Address ${address}</p>
+            <p>Country ${country}</p>
+            <p>Group ${region}</p>
+        `;
+
+        document.getElementById("cvContent").innerHTML = cvContent;
+    }
+</script>
+
+</body>
+</html>

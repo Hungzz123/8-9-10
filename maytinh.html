@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        #calculator {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5px;
+        }
+
+        input {
+            grid-column: span 4;
+            margin-bottom: 10px;
+            padding: 10px;
+            box-sizing: border-box;
+            order: 1; /* Đặt số thứ tự của input là 1 */
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            margin: 5px;
+            font-size: 16px;
+            grid-column: span 1;
+            order: 2; /* Đặt số thứ tự của các button là 2 */
+        }
+
+        button:nth-child(1) {
+            order: 3; /* Đặt số thứ tự của button đầu tiên là 3 */
+        }
+
+        button:nth-child(2) {
+            order: 4; /* Đặt số thứ tự của button thứ hai là 4 */
+        }
+
+        /* ... Các rules tiếp theo cho các button còn lại ... */
+    </style>
+</head>
+<body>
+
+<div id="calculator">
+    <input type="text" id="expression" placeholder="Enter expression (e.g., 2+3)">
+    <button onclick="appendCharacter('/')">/</button>
+    <button onclick="appendCharacter('1')">1</button>
+    <button onclick="appendCharacter('2')">2</button>
+    <button onclick="appendCharacter('3')">3</button>
+    <button onclick="appendCharacter('+')">+</button>
+    <button onclick="appendCharacter('4')">4</button>
+    <button onclick="appendCharacter('5')">5</button>
+    <button onclick="appendCharacter('6')">6</button>
+    <button onclick="appendCharacter('-')">-</button>   
+    <button onclick="appendCharacter('7')">7</button>
+    <button onclick="appendCharacter('8')">8</button>
+    <button onclick="appendCharacter('9')">9</button>
+    <button onclick="appendCharacter('*')">*</button>   
+    <button onclick="clearInput()">C</button>
+    <button onclick="appendCharacter('0')">0</button>
+    <button onclick="calculateResult()">=</button>
+</div>
+
+<script>
+    function appendCharacter(character) {
+        document.getElementById('expression').value += character;
+    }
+
+    function clearInput() {
+        document.getElementById('expression').value = '';
+    }
+
+    function calculateResult() {
+        try {
+            var expression = document.getElementById('expression').value;
+            var result = eval(expression);
+            document.getElementById('expression').value = result;
+        } catch (error) {
+            document.getElementById('expression').value = 'Error';
+        }
+    }
+</script>
+
+</body>
+</html>

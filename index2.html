@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký người dùng</title>
+    <h3>Personal Information</h3>
+    <style>
+        /* CSS styles here */
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input,
+        select,
+        button {
+            width: calc(100% - 20px);
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 10px;
+            color: red;
+        }
+
+        #genderContainer {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        #genderContainer label {
+            margin-right: 10px;
+            
+        }
+    </style>
+</head>
+<body>
+
+<form id="registrationForm">
+    <label for="username">Enter name*</label>
+    <input type="text" id="username" name="username" required>
+
+    <div id="genderContainer">
+        <label>Giới tính *</label>
+        <label><input type="radio" name="gender" value="male"> Nam</label>
+        <label><input type="radio" name="gender" value="female"> Nữ</label>
+    </div>
+
+    <label for="email">Enter email address*</label>
+    <input type="text" id="email" name="email" required>
+
+    <label for="dob">Enter birthday (MM/DD/YYYY)*</label>
+    <input type="text" id="dob" name="dob" placeholder="mm/dd/yyyy" required>
+
+    <label for="address">Enter street address (line 1)*</label>
+    <input type="text" id="address" name="address" required>
+
+    <label for="city">Enter city*</label>
+    <input type="text" id="city" name="city" required>
+
+    <label for="region">Select a region*</label>
+    <select id="region" name="region" required>
+        <option value="north">Bắc</option>
+        <option value="central">Trung</option>
+        <option value="south">Nam</option>
+    </select>
+
+    <label for="zipCode">Zip Code *</label>
+    <input type="text" id="zipCode" name="zipCode" required>
+
+    <button type="button" onclick="clearForm()">Finish</button>
+    <button type="button" onclick="validateForm()">Clear</button>
+
+    <div id="messageContainer"></div>
+</form>
+
+<script>
+    function clearForm() {
+        document.getElementById("registrationForm").reset();
+        document.getElementById("result").innerText = "";
+    }
+
+    function validateForm() {
+        var username = document.getElementById("username").value;
+        var email = document.getElementById("email").value;
+        var dob = document.getElementById("dob").value;
+        var genderRadios = document.getElementsByName("gender");
+
+        // Kiểm tra dữ liệu
+        var usernameRegex = /^[a-zA-Z0-9]+$/;
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        var dobRegex = /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/\d{4}$|^(0[1-9]|1[0-2])\-(0[1-9]|[12][0-9]|3[01])\-\d{4}$/;
+        var zipCode = document.getElementById("zipCode").value;
+        var zipCodeRegex = /^\d{5}$/;
+        var messageContainer = document.getElementById("messageContainer");
+       
+        if (zipCodeRegex.test(zipCode)) {
+            document.getElementById("result").innerText = "Zip Code hợp lệ.";
+        } else {
+            document.getElementById("result").innerText = "Zip Code không hợp lệ. Zip Code phải có đúng 5 số.";
+        }
+        if (!usernameRegex.test(username) || !emailRegex.test(email) || !dobRegex.test(dob) || !isExactlyOneRadioChecked(genderRadios)) {
+            messageContainer.innerText = "Dữ liệu không hợp lệ. Vui lòng kiểm tra lại.";
+            messageContainer.style.color = "red";
+        } else {
+            var selectedGender = Array.from(genderRadios).find(radio => radio.checked).value;
+            messageContainer.innerText = "Đăng ký thành công! Giới tính: " + selectedGender;
+            messageContainer.style.color = "green";
+        }
+
+    function isExactlyOneRadioChecked(radios) {
+        return Array.from(radios).filter(radio => radio.checked).length === 1;
+    }
+    }
+
+
+</script>
+</body>
+</html>
